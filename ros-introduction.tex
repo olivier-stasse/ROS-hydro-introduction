@@ -1,0 +1,352 @@
+%\documentclass[handout]{beamer}
+\documentclass[t,french]{beamer}
+\usepackage{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx} %for jpg files
+\usepackage{beamerthemesplit} % new 
+\usetheme[compress]{Berlin}
+\usecolortheme{beaver}
+\usepackage{tikz}%tikz figures
+\usetikzlibrary{shapes}
+\usepackage{pgffor}% http://ctan.org/pkg/pgffor
+\usepackage{multirow}
+\usepackage{ifthen}
+\usepackage{subfigure} %spacing for table of contents
+%\usepackage{multimedia} %videos inside frame
+\usepackage{boolexpr}
+\usepackage{movie15}
+%\usepackage{bbold}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\graphicspath{{images/}}
+
+\def\R{ \ensuremath{\mathcal{R}} }
+\def\C{ \ensuremath{\mathcal{C}} }
+\def\SV{ \ensuremath{\mathcal{SV}} }
+
+\setbeamercolor{alerted text}{fg=orange}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{block body alerted}{bg=normal text.bg!90!black}
+\setbeamercolor{block body}{bg=normal text.bg!90!black}
+\setbeamercolor{block body example}{bg=normal text.bg!90!black}
+\setbeamercolor{block title}{bg=blue}
+\setbeamercolor{fine separation line}{}
+\setbeamercolor{frametitle}{fg=black,bg=gray!30}
+\setbeamercolor{item projected}{fg=black}
+\setbeamercolor{normal text}{bg=black,fg=black}
+\setbeamercolor{palette sidebar primary}{use=normal text,fg=normal text.fg}
+\setbeamercolor{palette sidebar quaternary}{use=structure,fg=structure.fg}
+\setbeamercolor{palette sidebar secondary}{use=structure,fg=structure.fg}
+\setbeamercolor{palette sidebar tertiary}{use=normal text,fg=normal text.fg}
+\setbeamercolor{section in sidebar}{fg=black}
+\setbeamercolor{section in sidebar shaded}{fg= grey}
+\setbeamercolor{separation line}{}
+\setbeamercolor{sidebar}{bg=red}
+\setbeamercolor{sidebar}{parent=palette primary}
+\setbeamercolor{structure}{bg=black, fg=red}
+\setbeamercolor{subsection in sidebar}{fg=black}
+\setbeamercolor{subsection in sidebar shaded}{fg=grey}
+\setbeamercolor{title}{fg=black!100,bg=gray!30}
+\setbeamercolor{titlelike}{fg=brown}
+
+%several template parameters
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{blocks}[rounded][shadow=true]
+%\beamertemplateshadingbackground{white!20}{black!20}
+\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=white!25]
+\setbeamertemplate{sidebar canvas left}[horizontal shading][left=white!40!black,right=black]
+\setbeamercolor{footline in sidebar}{fg=black}%[page number]
+%\setbeamertemplate{footline}[frame number]
+%suppress navigational bar
+\beamertemplatenavigationsymbolsempty
+%experimental stuff
+\setbeamertemplate{title page}[default][rounded=true,shadow=true]
+
+
+\include{tikz_commands}
+\include{commands}
+
+\setlength{\unitlength}{\textwidth}  % measure in textwidths
+\begin{document}
+
+\title{Introduction ROS}
+
+\author{Olivier Stasse \\ LAAS-CNRS, Toulouse, France}
+%-- \insertframenumber/\inserttotalframenumber}
+
+\date{20-21/05/2014} 
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table des matières}
+    \tableofcontents[currentsection,
+      hideothersubsections]
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+  \usebackgroundtemplate{\includegraphics[width=1.0\paperwidth]{images/background-title-3.png}}
+  \begin{frame}[plain]
+    %\tikzstyle{stringbox}=[rectangle,color=black,fill=blue!10,text=black,draw,text opacity=0.4,align=flush center]
+    \begin{tikzpicture}[remember picture, overlay]
+       \node [yshift=1.8cm, xshift=-1cm, text width=4cm] (title) at (current page.center) 
+            { Introduction à ROS \\
+              Formation AIP};
+       \node [xshift=-3.1cm,yshift=0.5cm,
+              fill=white!10,fill opacity=0.7,right,text width=3cm]
+             (author) at (current page.center) [scale=0.7]
+            {
+              Olivier STASSE, \\
+              CR-1, CNRS, \\
+              Gepetto, \\
+              LAAS CNRS
+            }; 
+       \node [xshift=-3.1cm,yshift=-0.8cm,
+              fill=white!10,fill opacity=0.7,
+              right,text width=3cm]
+        (author) 
+        at (current page.center)
+            {
+              AIP, Toulouse\\
+              $20-21$ Mai
+              2014
+            }; 
+    \end{tikzpicture}
+  \end{frame}
+}
+\begin{frame}
+  \frametitle{Table des matières}
+  \tableofcontents
+\end{frame}
+\section{Panorama}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{frame}
+\frametitle{Motivations}
+\begin{block}{Passage à l'échelle}
+La communauté robotique doit \textit{collaborer} pour créer des systèmes robotiques
+de qualité à l'exemple de l'informatique et la physique. \\
+ROS est l'outil qui a permis ce passage. 
+\end{block}
+
+\begin{tikzpicture}[remember picture, overlay]
+  %\draw[help lines] (0,-3) grid (10,0);
+  \pgfputat{\pgfxy(0.0,-2.5)}{\pgfbox[left,base]{\pgfuseimage{ROSEquation}}};
+  \node[xshift=3cm,yshift=-2.5cm]{Plomberie};
+  \node[xshift=5cm,yshift=-2.5cm]{Outils};
+  \node[xshift=7.15cm,yshift=-2.5cm]{Capacités};
+  \node[xshift=9.21cm,yshift=-2.5cm]{Ecosystème};
+  %\node at (0,0) {(0,0)};	
+\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Motivations - Application robotique \only<2>{- Outils}\only<3>{distribuée}
+  }
+  \begin{tikzpicture}[remember picture, overlay]
+    %HRP-2
+    \draw[help lines] (0,-6) grid (10,0);
+    \node[inner sep=0pt,scale=0.5] (hrp2) at (7.5,-3.0) {%
+      \includegraphics[width=3.5cm]{images/PR2-robot.jpeg}%
+    };    
+    \node[inner sep=0pt,scale=1.1] at (10.0,-3.0) {%
+      Environnement
+    };
+    \node at (0,0) {(0,0)};	
+  \end{tikzpicture}
+  
+  \begin{tikzpicture}[remember picture, overlay]
+    %
+    \draw[color=darkred, left color=red, right color=red!60, 
+      xshift=9cm,yshift=-2cm,
+      drop shadow={ashadow, color=red!60!black}] 
+    \arrow;
+    \draw[color=darkblue, right color=blue, left color=blue!60,%
+      xshift=9cm,yshift=-3cm, %
+      drop shadow={ashadow, color=blue!60!black}]       
+     [rotate=260] \arrow;
+    %
+    % Noeud sur le traitement du signal.
+    \node [text centered, text width = 1.75cm, rectangle,draw,fill=blue!50!white] 
+    (sensors)
+    at (5.5,-0.25) {Traitement\\du signal};
+    \node<2> [text centered, text width = 3cm] 
+    at (5.5,0.5) {OpenCV - PCL};
+    \node<3> [text centered, text width = 3cm] 
+    at (5.5,0.5) {PC - Vision};
+    %
+    % Représentation de l'environnement
+    \node [text centered, text width = 3.2cm, rectangle,draw,fill=blue!50!white] 
+    (worldmap)
+    at (2.0,-0.75) {Représentation\\ de l'environnement};
+    \node<2> [text centered, text width = 3.2cm] 
+    at (2.0,0.0) {OctoMap};
+    \node<3> [text centered, text width = 3.2cm] 
+    at (2.0,0.0) {PC - Mapping};
+    %
+    % Contrôle
+    \node [text centered, text width = 1.75cm, rectangle,draw,fill=blue!50!white] 
+    (control) 
+    at (5.5,-4.9) {Contrôle};    
+    \node<2> [text centered, text width = 3.5cm] 
+    at (5.5,-5.45) {KLD - iTask - SoT};
+    \node<3> [text centered, text width = 3.5cm] 
+    at (5.5,-5.45) {PC - Contrôle};
+    %
+    % Planification de mouvement
+    \node [text centered, text width = 2.5cm, rectangle,draw,fill=blue!50!white] 
+    (motionplanning)
+    at (2.25,-4.25) {Planification de mouvement};
+    \node<2> [text centered, text width = 2.5cm] 
+    at (2.25,-5.0) {MovIt};
+    \node<3> [text centered, text width = 4.5cm] 
+    at (2.25,-5.0) {PC - Motion Planning};
+    %
+    % Planification de taches.
+    \node [text centered, text width = 2.0cm, rectangle,draw,fill=blue!50!white] 
+    (taskplanning)
+    at (1,-2.5) {Planification de tâches};          
+    \node<2> [text centered, text width = 2.0cm] 
+    at (0.25,-3.25) {SMACH};          
+    \node<3> [text centered, text width = 4.5cm] 
+    at (1.25,-3.25) {PC - Task Planning};
+    %
+    % Physical relationship
+    \draw[->,>=triangle 60,very thick,color=red] (hrp2) -- (sensors);
+    \draw[->,>=triangle 60,very thick,color=red] (control) -- (hrp2);
+    %
+    % Logical relationship
+    \visible<1-2> {
+      % 
+      % Data flow
+      \draw[<-,>=triangle 45,>=triangle 45] (control)--(sensors);
+      \draw[->,>=triangle 45,>=triangle 45] (motionplanning)--(control); 
+      \draw[->,>=triangle 45,>=triangle 45] (sensors)--(worldmap); 
+      \draw[->,>=triangle 45,>=triangle 45] (worldmap) to[out=315,in=90] (motionplanning); 
+      \draw[<-,>=triangle 45,>=triangle 45] (taskplanning) -- (worldmap);
+      \draw[->,>=triangle 45,>=triangle 45] (taskplanning)--(motionplanning);
+      \draw[->,>=triangle 45,>=triangle 45] (taskplanning) to[out=0,in=135] (control);
+    }
+    %
+    % Software relationship
+    \visible<3> {
+      %
+      % Bus logiciel.
+      \node [text centered, text width = 2.0cm, rectangle,draw,fill=blue!20!white] 
+      (softwarebus) at (5,-2.5) {Bus logiciel};          
+      % 
+      % Software bus
+      \draw[<->,>=triangle 45,>=triangle 45] (control)--(softwarebus);
+      \draw[<->,>=triangle 45,>=triangle 45] (motionplanning) -- (softwarebus); 
+      \draw[<->,>=triangle 45,>=triangle 45] (worldmap)--(softwarebus); 
+      \draw[<->,>=triangle 45,>=triangle 45] (taskplanning)--(softwarebus);
+      \draw[<->,>=triangle 45,>=triangle 45] (sensors)--(softwarebus);
+    }
+  \end{tikzpicture}
+\end{frame}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Motivations - Plomberie}
+  \begin{block}{Middleware}
+    \begin{itemize}     
+      \item Publication/souscription à la transmission de messages anonymes (Message Passing)
+      \item Enregistrer et rejouer des messages
+      \item Requêtes/réponses à des remote procedure calls
+      \item Système de paramètres distribués
+    \end{itemize}
+  \end{block}
+  %
+  %\begin{tikzpicture}
+  %  \draw[help lines] (0,-3) grid (10,0);
+  %  \node at (0,0) {(0,0)};	
+  %\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{ROS: Bref historique}
+ \vskip -0.25cm
+ \begin{tabular}{|p{3cm}|p{7.5cm}|} \hline 
+   2008 & Démarrage de ROS par Willow Garage \\ 
+   2010 - Janvier & ROS 1.0 \\
+   2010 - Mars & Box Turtle \\
+   2010 - Aout & C Turtle \\
+   2011 - Mars &  Diamondback \\
+   2011 - Aout & Electric Emys \\
+   2012 - Avril & Fuerte \\
+   2012 - Décembre & Groovy Galapagos\\
+   2013 - Février & Open Source Robotics Fundation poursuit la gestion de ROS \\
+   2013 - Aout & Willow Garage est absorbé par Suitable Technologies \\
+   2013 - Aout & PR-2 is supported now by Clearpath Robotics\\
+   2013 - Septembre& Hydro Medusa \\ \hline
+ \end{tabular}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Motivations - Outils}
+  \begin{itemize}
+    \item[rviz] Visualisateur graphique 3D.
+    \item[rosbag] Enregistrement et visualisation des données.
+    \item[rxplot] Affichage en ligne.
+    \item[rxgraph] Visualisation du système.
+    \item[catkin] Système de compilation et de gestion de paquets.
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Motivations - Ecosystème}
+  \vskip 0.25cm
+  \begin{itemize}
+    \item Définitions de messages standards pour les robots
+    \item Librairie pour la géométrie des robots
+    \item Language de description des robots
+    \item Remote Procedure Calls préemptable
+    \item Diagnostiques
+    \item Estimation de pose
+    \item Localisation
+    \item Cartographie
+    \item Navigation
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Motivations - Ecosystème}
+  \begin{itemize}
+    \item Systèmes d'exploitation
+    \item Robots
+    \item 
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Communications ROS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Organisation des programmes sous ROS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Programmer avec ROS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{La librairie TF}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Programmer un noeud ROS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conclusions}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\end{document}
+
