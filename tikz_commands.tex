@@ -63,3 +63,130 @@
 
   \end{scope}
 }
+
+\def\motivationpicture{
+  \begin{tikzpicture}[remember picture, overlay]
+    %HRP-2
+    \node[inner sep=0pt,scale=0.5] (hrp2) at (7.5,-3.0) {%
+      \includegraphics[width=3.5cm]{images/PR2-robot.jpeg}%
+    };    
+    \node[inner sep=0pt,scale=1.1] at (10.0,-3.0) {%
+      Environnement
+    };
+  \end{tikzpicture}
+}
+
+\def\motivationgraph{
+  \begin{tikzpicture}[remember picture, overlay]
+    %
+    \draw[color=darkred, left color=red, right color=red!60, 
+      xshift=9cm,yshift=-2cm,
+      drop shadow={ashadow, color=red!60!black}] 
+    \arrow;
+    \draw[color=darkblue, right color=blue, left color=blue!60,%
+      xshift=9cm,yshift=-3cm, %
+      drop shadow={ashadow, color=blue!60!black}]       
+     [rotate=260] \arrow;
+    %
+    % Noeud sur le traitement du signal.
+    \node [text centered, text width = 1.75cm, rectangle,draw,fill=blue!50!white] 
+    (sensors)
+    at (5.5,-0.25) {Traitement\\du signal};
+    %
+    % Représentation de l'environnement
+    \node [text centered, text width = 3.2cm, rectangle,draw,fill=blue!50!white] 
+    (worldmap)
+    at (2.0,-0.75) {Représentation\\ de l'environnement};
+    %
+    % Contrôle
+    \node [text centered, text width = 1.75cm, rectangle,draw,fill=blue!50!white] 
+    (control) 
+    at (5.5,-4.9) {Contrôle};    
+    %
+    % Planification de mouvement
+    \node [text centered, text width = 2.5cm, rectangle,draw,fill=blue!50!white] 
+    (motionplanning)
+    at (2.25,-4.25) {Planification de mouvement};
+    %
+    % Planification de taches.
+    \node [text centered, text width = 2.0cm, rectangle,draw,fill=blue!50!white] 
+    (taskplanning)
+    at (1,-2.5) {Planification de tâches};          
+    %
+    % Physical relationship
+    \draw[->,>=triangle 60,very thick,color=red] (hrp2) -- (sensors);
+    \draw[->,>=triangle 60,very thick,color=red] (control) -- (hrp2);
+  \end{tikzpicture}
+}
+
+\def\implementationgraph{
+ \begin{tikzpicture}[remember picture, overlay]
+    \node [text centered, text width = 3cm] 
+    at (5.5,0.5) {OpenCV - PCL};
+
+    \node [text centered, text width = 3.2cm] 
+    at (2.0,0.0) {OctoMap};
+
+    \node [text centered, text width = 3.5cm] 
+    at (5.5,-5.45) {KLD - iTask - SoT};
+
+    \node [text centered, text width = 2.5cm] 
+    at (2.25,-5.0) {MovIt};
+
+    \node [text centered, text width = 2.0cm] 
+    at (0.25,-3.25) {SMACH};   
+ \end{tikzpicture}
+}       
+
+\def\deploymentgraph{
+ \begin{tikzpicture}[remember picture, overlay]
+    \node [text centered, text width = 3cm] 
+    at (5.5,0.5) {PC - Vision};
+
+    \node [text centered, text width = 3.2cm] 
+    at (2.0,0.0) {PC - Mapping};
+
+    \node [text centered, text width = 3.5cm] 
+    at (5.5,-5.45) {PC - Contr\^{o}le};
+
+    \node [text centered, text width = 4.5cm] 
+    at (2.25,-5.0) {PC - Motion Planning};
+
+    \node [text centered, text width = 4.5cm] 
+    at (1.25,-3.25) {PC - Task Planning};
+ \end{tikzpicture}
+}
+
+
+\def\logicalrelationship{
+ \begin{tikzpicture}[remember picture, overlay]        
+   %
+    % Logical relationship
+      % Data flow
+   \draw[<-,>=triangle 45,>=triangle 45] (control)--(sensors);
+   \draw[->,>=triangle 45,>=triangle 45] (motionplanning)--(control); 
+   \draw[->,>=triangle 45,>=triangle 45] (sensors)--(worldmap); 
+   \draw[->,>=triangle 45,>=triangle 45] (worldmap) to[out=315,in=90] (motionplanning); 
+   \draw[<-,>=triangle 45,>=triangle 45] (taskplanning) -- (worldmap);
+   \draw[->,>=triangle 45,>=triangle 45] (taskplanning)--(motionplanning);
+   \draw[->,>=triangle 45,>=triangle 45] (taskplanning) to[out=0,in=135] (control);
+ \end{tikzpicture}
+}
+
+\def\softwarerelationship{
+ \begin{tikzpicture}[remember picture, overlay]        
+    %
+    % Software relationship
+    % Bus logiciel.
+    \node [text centered, text width = 2.0cm, rectangle,draw,fill=blue!20!white] 
+    (softwarebus) at (5,-2.5) {Bus logiciel};          
+    % 
+    % Software bus
+    \draw[<->,>=triangle 45,>=triangle 45] (control)--(softwarebus);
+    \draw[<->,>=triangle 45,>=triangle 45] (motionplanning) -- (softwarebus); 
+    \draw[<->,>=triangle 45,>=triangle 45] (worldmap)--(softwarebus); 
+    \draw[<->,>=triangle 45,>=triangle 45] (taskplanning)--(softwarebus);
+    \draw[<->,>=triangle 45,>=triangle 45] (sensors)--(softwarebus);
+ \end{tikzpicture}
+}
+ 
