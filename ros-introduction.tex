@@ -121,9 +121,10 @@
   \frametitle{Table des matières}
   \tableofcontents
 \end{frame}
+
 \section{Panorama}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+\subsection{Motivations générales}
 \begin{frame}
 \frametitle{Motivations}
 \begin{block}{Passage à l'échelle}
@@ -178,25 +179,6 @@ ROS est l'outil qui a permis ce passage.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{ROS: Bref historique}
- \vskip -0.25cm
- \begin{tabular}{|p{3cm}|p{7.5cm}|} \hline 
-   2008 & Démarrage de ROS par Willow Garage \\ 
-   2010 - Janvier & ROS 1.0 \\
-   2010 - Mars & Box Turtle \\
-   2010 - Aout & C Turtle \\
-   2011 - Mars &  Diamondback \\
-   2011 - Aout & Electric Emys \\
-   2012 - Avril & Fuerte \\
-   2012 - Décembre & Groovy Galapagos\\
-   2013 - Février & Open Source Robotics Fundation poursuit la gestion de ROS \\
-   2013 - Aout & Willow Garage est absorbé par Suitable Technologies \\
-   2013 - Aout & PR-2 is supported now by Clearpath Robotics\\
-   2013 - Septembre& Hydro Medusa \\ \hline
- \end{tabular}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
   \frametitle{Motivations - Outils}
   \begin{itemize}
     \item[rviz] Visualisateur graphique 3D.
@@ -225,21 +207,233 @@ ROS est l'outil qui a permis ce passage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Motivations - Ecosystème}
-  \begin{itemize}
-    \item Systèmes d'exploitation
-    \item Robots
-    \item 
-  \end{itemize}
+  \begin{columns}[t]
+    \begin{column}[T]{0.5\linewidth}
+      \begin{itemize}
+        \item Systèmes d'exploitation
+        \item Robots
+        \item Packages
+      \end{itemize}
+    \end{column}
+    \begin{column}[T]{0.5\linewidth}
+      \visible<1>{\rosecosystem}
+      \visible<2>{\robotsecosystem}
+    \end{column}
+  \end{columns}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{ROS - Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{ROS: Bref historique}
+ \vskip -0.25cm
+ \begin{tabular}{|p{3cm}|p{7.5cm}|} \hline 
+   2008 & Démarrage de ROS par Willow Garage \\ 
+   2010 - Janvier & ROS 1.0 \\
+   2010 - Mars & Box Turtle \\
+   2010 - Aout & C Turtle \\
+   2011 - Mars &  Diamondback \\
+   2011 - Aout & Electric Emys \\
+   2012 - Avril & Fuerte \\
+   2012 - Décembre & Groovy Galapagos\\
+   2013 - Février & Open Source Robotics Fundation poursuit la gestion de ROS \\
+   2013 - Aout & Willow Garage est absorbé par Suitable Technologies \\
+   2013 - Aout & PR-2 is supported now by Clearpath Robotics\\
+   2013 - Septembre& Hydro Medusa \\ \hline
+ \end{tabular}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{ROS: Normalisation des releases}
+ \vskip -0.25cm
+ \begin{itemize}
+   \item Hydro Medusa (Aug 2013)
+     \begin{itemize}
+       \item Ubuntu Precise (12.04 LTS)
+       \item Ubuntu Quantal (12.10)
+       \item Ubuntu Raring (13.04)
+       \item C++03, Boost 1.48, Lisp SBCL 1.0.x, Python 2.7, CMake 2.8.3
+     \end{itemize}
+   \item Indigo Igloo (May 2014)
+     \begin{itemize}
+       \item Ubuntu Saucy (13.10)
+       \item Ubuntu Trusty (14.04 LTS)
+       \item C++03, Boost 1.53, Lisp SBCL 1.0.x, Python 2.7, (Test
+         additionels contre Python 3.3 recommendés) CMake 2.8.11
+     \end{itemize}
+   \item Lien vers la ROS Enhancement Proposal (REPs) :\\
+     \url{http://www.ros.org/reps/rep-0003.html}
+ \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Installation ROS Hydro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Installation de ROS - Hydro - Ubuntu 12.04.4 LTS}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] (instros1) 
+      {1 - Spécifications des sources.list}; \\
+    \node[roscode] (instros2) 
+      {sudo sh -c 'echo "deb http ://packages.ros.org/ros/ubuntu
+       precise main" $>$ /etc/apt/sources.list.d/ros-latest.list'}; \\
+    \node[roslist] 
+      {2 - Spécifications des clefs}; \\
+    \node[roscode] 
+      {wget http ://packages.ros.org/ros.key -O - | sudo apt-key add -};\\
+    \node[roslist] 
+      {3 - Mise à jour des listes de paquets};\\
+    \node[roscode] 
+      {sudo apt-get update}; \\
+    \node[roslist] 
+      {4 - Installation des paquets};\\
+    \node[roscode] 
+      {sudo apt-get install ros-hydro-desktop-full};\\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Configuration ROS Hydro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] 
+      {1 - Spécifications de ROS\_ROOT et ROS PACKAGE PATH }; \\
+    \node[roscode] 
+      {export j grep ROS}; \\
+    \node[roslist] 
+      {2 - Ligne à ajouter au fichier .bashrc}; \\
+    \node[roscode] 
+      {source /opt/ros/hydro/setup.bash};\\
+    \node[roslist] 
+      {3 - Création de l'espace catkin};\\
+    \node[roscode] 
+      {mkdir -p ~/catkin ws/src \\
+       cd ~/catkin ws/src \\
+       catkin init workspace}; \\
+    \node {\tiny Tutorial Installing and Confixguring Your ROS Environment :}; \\
+    \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}}; \\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,0)
+  {
+    \node[roslist] 
+      {4 - Ligne à ajouter au fichier .bashrc}; \\
+    \node[roscode] 
+      {source \$HOME/catkin ws/devel/setup.bash}; \\
+    \node {\tiny Tutorial Installing and Confixguring Your ROS Environment :}; \\
+    \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}}; \\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Navigation dans ROS Hydro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{ROS Filesystem - Navigation - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] 
+      {1 - rospack : Donne les informations sur les paquets}; \\
+    \node[roscode] 
+      {rospack find}; \\
+    \node[roslist] 
+      {2 - roscd : Bascule le répertoire directement sur le paquet}; \\
+    \node[roscode] 
+      {roscd roscpp \\
+       roscd roscpp/cmake \\
+       roscd log};\\
+    \node[roslist] 
+      {3 - rosls : Affiche le contenu du répertoire d'un paquet};\\
+    \node[roscode] 
+      {rosls roscpp tutorials}; \\
+    \node {\tiny Tutorial Navigation dans le système de fichiers }; \\
+    \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem}}; \\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Création d'un paquet pour ROS Hydro}    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Création d'un paquet ROS - Définition - Hydro}
+  \begin{itemize}
+    \item Le paquet doit contenir un fichier \textcolor{blue}{package.xml} qui suit le
+      format catkin. Le fichier \textcolor{blue}{package.xml} contient des meta
+      informations sur le paquet.
+    \item Il n'y a qu'un seul paquet par répertoire. \\
+      Les paquets imbriqués, et les paquets dans un même
+      répertoire sont interdits.
+  \end{itemize}
+  Le paquet le plus simple est:
+  \begin{tikzpicture}   
+    \node[roscode]
+      {mon\_paquet/\\
+       CMakeLists.txt\\
+       package.xml};
+  \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Organisation des programmes sous ROS}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Création de paquets}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Paquets dans un workspace catkin - (1/9) - Hydro}
+\tikzstyle{every node}=[anchor=west
+%,font=\fontsize{6}{6}\selectfont
+]
+\tikzstyle{selected}=[draw=blue!50,fill=blue!20
+%,font=\fontsize{6}{6}\selectfont
+]
+\tikzstyle{root}=[draw=blue,fill=blue!50
+%,font=\fontsize{6}{6}\selectfont
+]
+{\scriptsize
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.75,-0.5) and
+  two children at (0.75,-0.5) and (0.75,-1.0)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+  \node [root] {work\_space\_folder}
+    child {  node [selected] {src}
+      child { node {CMakeLists.txt}}
+      child { node [selected] {package\_1}
+        child { node {CMakeLists.txt}}
+        child { node {package.xml}}
+      }
+     child [missing] {}				
+     child [missing] {}
+     child { node [selected] {...}}
+     child { node [selected] {package\_n}
+        child { node {CMakeLists.txt}}
+        child { node {package.xml}}
+      }
+    };
+\end{tikzpicture}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Définitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Communications ROS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Organisation des programmes sous ROS}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Programmer avec ROS}

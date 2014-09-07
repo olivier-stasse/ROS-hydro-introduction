@@ -5,10 +5,31 @@
 \pgfdeclareimage[width=10cm]{pcl}{./images/pointcloudlibrary_horz_large_pos.jpg}
 \pgfdeclareimage[width=10cm]{moveit}{./images/moveit-logo.png}
 
+\pgfdeclareimage[width=2cm]{ros-ubuntu-logo}{./images/ros-ubuntu-logo.png}
+
+\pgfdeclareimage[width=2cm]{ros-ubuntu-arm-logo}{./images/ros-ubuntu-arm-logo.png}
+\pgfdeclareimage[width=2cm]{ros-os-x-homebrew-logo}{./images/ros-os-x-homebrew-logo.png}
+\pgfdeclareimage[width=2cm]{ros-os-x-macports-logo}{./images/ros-os-x-macports-logo.png}
+
+\pgfdeclareimage[width=2cm]{ros-yocto-logo}{./images/ros-yocto-logo.png}
+\pgfdeclareimage[width=2cm]{ros-debian-logo}{./images/ros-debian-logo.png}
+\pgfdeclareimage[width=2cm]{ros-arch-linux-logo}{./images/ros-arch-linux-logo.png}
+
+\pgfdeclareimage[width=2cm]{ros-windows-logo}{./images/ros-windows-logo.png}
+\pgfdeclareimage[width=2cm]{ros-angstrom-logo}{./images/ros-angstrom-logo.png}
+\pgfdeclareimage[width=2cm]{ros-udoo-logo}{./images/ros-udoo-logo.png}
+
+\pgfdeclareimage[width=2cm]{ros-arch-linux-logo}{./images/ros-arch-linux-logo.png}
+
+\pgfdeclareimage[width=2cm]{ros-nao}{./images/nao.jpg}
+\pgfdeclareimage[width=3cm]{ros-turtlebot}{./images/robot-turtlebot2-front.jpg}
+\pgfdeclareimage[width=3cm]{ros-motoman}{./images/motomanSIA10D.jpg}
+
 % Tikz libraries
 \usetikzlibrary{shadows}
 \usetikzlibrary{automata}
 \usetikzlibrary{arrows}
+\usetikzlibrary{trees}
 
 % For arrows
 \definecolor{darkblue}{rgb}{0.2,0.2,0.6}
@@ -68,9 +89,9 @@
   \begin{tikzpicture}[remember picture, overlay]
     %HRP-2
     \node[inner sep=0pt,scale=0.5] (hrp2) at (7.5,-3.0) {%
-      \includegraphics[width=3.5cm]{images/PR2-robot.jpeg}%
+      \includegraphics[width=3.5cm]{images/PR2-robot-2.jpeg}%
     };    
-    \node[inner sep=0pt,scale=1.1] at (10.0,-3.0) {%
+    \node[inner sep=0pt,scale=1.1] at (10.0,-2.0) {%
       Environnement
     };
   \end{tikzpicture}
@@ -190,3 +211,43 @@
  \end{tikzpicture}
 }
  
+\def\rosecosystem{
+  \begin{tikzpicture}[remember picture, overlay]        
+     %\draw[help lines] (0,-3) grid (5,0);         
+     %\node at (0,0) {(0,0)};
+     \node at (-0.25,-0.5) {Supporté :};
+     \node at (2.0,-0.5) {\pgfuseimage{ros-ubuntu-logo}};
+     \node at (0.25,-1.5) {Expérimentaux :};
+  
+     \node at ( 0.0,-2.5) {\pgfuseimage{ros-ubuntu-arm-logo}};
+     \node at ( 2.0,-2.5) {\pgfuseimage{ros-os-x-homebrew-logo}};
+     \node at ( 4.0,-2.5) {\pgfuseimage{ros-os-x-macports-logo}};
+     
+     \node at ( 0.0,-3.5) {\pgfuseimage{ros-yocto-logo}};
+     \node at ( 2.0,-3.5) {\pgfuseimage{ros-debian-logo}};
+     \node at ( 4.0,-3.5) {\pgfuseimage{ros-arch-linux-logo}};
+
+     \node at ( 0.0,-4.5) {\pgfuseimage{ros-windows-logo}};
+     \node at ( 2.0,-4.5) {\pgfuseimage{ros-angstrom-logo}};
+     \node at ( 4.0,-4.5) {\pgfuseimage{ros-udoo-logo}};
+     
+  \end{tikzpicture}\\
+}
+
+\tikzstyle{roscode}=[text width=10cm,fill=blue!20,
+                     thick,draw=blue!50]
+\tikzstyle{roslist}=[]
+
+\def\robotsecosystem{
+  \begin{tikzpicture}[remember picture, overlay]        
+     %\draw[help lines] (-6,-3) grid (5,0);         
+     %\node at (0,0) {(0,0)};
+     \node[right] at (-3.0,-0.3) {\tiny 01/05/2014 : 111 Robots supportés sur \url{http://wiki.ros.org/Robots}};
+     \node[right] at (-3.0,-0.85)  {\tiny 01/05/2014 : 2048 Packages supportés sur \url{http://wiki.ros.org/Packages}};
+  
+     \node at (  0.0,-3.5) {\pgfuseimage{ros-nao}};
+     \node at (  4.0,-3.5) {\pgfuseimage{ros-turtlebot}};
+     \node at ( -4.0,-3.5) {\pgfuseimage{ros-motoman}};
+     
+  \end{tikzpicture}\\        
+}
