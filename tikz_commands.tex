@@ -25,11 +25,19 @@
 \pgfdeclareimage[width=3cm]{ros-turtlebot}{./images/robot-turtlebot2-front.jpg}
 \pgfdeclareimage[width=3cm]{ros-motoman}{./images/motomanSIA10D.jpg}
 
+\pgfdeclareimage[width=4cm]{rviz}{./images/rviz.png}
+\pgfdeclareimage[width=4cm]{rosbag-slam}{./images/rosbag-slam.png}
+\pgfdeclareimage[width=4cm]{rxplot}{./images/rxplot.png}
+\pgfdeclareimage[width=4cm]{rxgraph}{./images/rxgraph_turtle_key.png}
+\pgfdeclareimage[width=4cm]{rqt}{./images/rqt.jpg}
+
+
 % Tikz libraries
 \usetikzlibrary{shadows}
 \usetikzlibrary{automata}
 \usetikzlibrary{arrows}
 \usetikzlibrary{trees}
+\usetikzlibrary{positioning}
 
 % For arrows
 \definecolor{darkblue}{rgb}{0.2,0.2,0.6}
@@ -91,7 +99,7 @@
     \node[inner sep=0pt,scale=0.5] (hrp2) at (7.5,-3.0) {%
       \includegraphics[width=3.5cm]{images/PR2-robot-2.jpeg}%
     };    
-    \node[inner sep=0pt,scale=1.1] at (10.0,-2.0) {%
+    \node[inner sep=0pt,scale=1.1] at (10.0,-2.5) {%
       Environnement
     };
   \end{tikzpicture}
@@ -117,7 +125,7 @@
     % Représentation de l'environnement
     \node [text centered, text width = 3.2cm, rectangle,draw,fill=blue!50!white] 
     (worldmap)
-    at (2.0,-0.75) {Représentation\\ de l'environnement};
+    at (2.0,-0.75) {Représen    tation\\ de l'environnement};
     %
     % Contrôle
     \node [text centered, text width = 1.75cm, rectangle,draw,fill=blue!50!white] 
@@ -143,38 +151,43 @@
 \def\implementationgraph{
  \begin{tikzpicture}[remember picture, overlay]
     \node [text centered, text width = 3cm] 
-    at (5.5,0.5) {OpenCV - PCL};
+    at (4.5,0.5) {OpenCV - PCL};
 
     \node [text centered, text width = 3.2cm] 
-    at (2.0,0.0) {OctoMap};
+    at (1.0,0.0) {OctoMap};
 
     \node [text centered, text width = 3.5cm] 
-    at (5.5,-5.45) {KLD - iTask - SoT};
+    at (4.75,-5.45) {KLD - iTask - SoT};
 
     \node [text centered, text width = 2.5cm] 
-    at (2.25,-5.0) {MovIt};
+    at (1.25,-5.0) {MovIt};
 
     \node [text centered, text width = 2.0cm] 
-    at (0.25,-3.25) {SMACH};   
+    at (-0.75,-3.25) {SMACH};   
  \end{tikzpicture}
 }       
 
 \def\deploymentgraph{
  \begin{tikzpicture}[remember picture, overlay]
-    \node [text centered, text width = 3cm] 
-    at (5.5,0.5) {PC - Vision};
+    \node[text centered, text width = 3cm] 
+    (pcvision) at (4.25,0.5) 
+    {PC - Vision};
 
-    \node [text centered, text width = 3.2cm] 
-    at (2.0,0.0) {PC - Mapping};
+    \node[text centered, text width = 3.2cm] 
+    (pcmapping) at (0.75,0.0) 
+    {PC - Mapping};
 
-    \node [text centered, text width = 3.5cm] 
-    at (5.5,-5.45) {PC - Contr\^{o}le};
+    \node[text centered, text width = 3.5cm] 
+    (pccontrol) at (4.3,-5.45) 
+    {PC - Contr\^{o}le};
 
-    \node [text centered, text width = 4.5cm] 
-    at (2.25,-5.0) {PC - Motion Planning};
+    \node[text centered, text width = 4.5cm] 
+    (pcmotionplanning) at (1.05,-5.0) 
+    {PC - Motion Planning};
 
-    \node [text centered, text width = 4.5cm] 
-    at (1.25,-3.25) {PC - Task Planning};
+    \node[text centered, text width = 4.5cm] 
+    (pctaskplanning) at (-0.5,-3.25) 
+    {PC - Task Planning};
  \end{tikzpicture}
 }
 
@@ -196,11 +209,13 @@
 
 \def\softwarerelationship{
  \begin{tikzpicture}[remember picture, overlay]        
+    %\draw[help lines] (-5,-5) grid (5,5);
+    %\node at (0,0) {(0,0)};
     %
     % Software relationship
     % Bus logiciel.
     \node [text centered, text width = 2.0cm, rectangle,draw,fill=blue!20!white] 
-    (softwarebus) at (5,-2.5) {Bus logiciel};          
+    (softwarebus) at (3,-2.5) {Bus logiciel};          
     % 
     % Software bus
     \draw[<->,>=triangle 45,>=triangle 45] (control)--(softwarebus);
@@ -236,7 +251,7 @@
 
 \tikzstyle{roscode}=[text width=10cm,fill=blue!20,
                      thick,draw=blue!50]
-\tikzstyle{roslist}=[]
+\tikzstyle{roslist}=[text width=10cm]
 
 \def\robotsecosystem{
   \begin{tikzpicture}[remember picture, overlay]        

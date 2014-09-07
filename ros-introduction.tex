@@ -119,7 +119,7 @@
 }
 \begin{frame}
   \frametitle{Table des matières}
-  \tableofcontents
+  \tableofcontents[hideallsubsections]
 \end{frame}
 
 \section{Panorama}
@@ -134,13 +134,11 @@ ROS est l'outil qui a permis ce passage.
 \end{block}
 
 \begin{tikzpicture}[remember picture, overlay]
-  %\draw[help lines] (0,-3) grid (10,0);
   \pgfputat{\pgfxy(0.0,-2.5)}{\pgfbox[left,base]{\pgfuseimage{ROSEquation}}};
   \node[xshift=3cm,yshift=-2.5cm]{Plomberie};
   \node[xshift=5cm,yshift=-2.5cm]{Outils};
   \node[xshift=7.15cm,yshift=-2.5cm]{Capacités};
   \node[xshift=9.21cm,yshift=-2.5cm]{Ecosystème};
-  %\node at (0,0) {(0,0)};	
 \end{tikzpicture}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -171,11 +169,6 @@ ROS est l'outil qui a permis ce passage.
       \item Système de paramètres distribués
     \end{itemize}
   \end{block}
-  %
-  %\begin{tikzpicture}
-  %  \draw[help lines] (0,-3) grid (10,0);
-  %  \node at (0,0) {(0,0)};	
-  %\end{tikzpicture}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -187,6 +180,13 @@ ROS est l'outil qui a permis ce passage.
     \item[rxgraph] Visualisation du système.
     \item[catkin] Système de compilation et de gestion de paquets.
   \end{itemize}
+  \begin{tikzpicture}[remember picture,overlay]
+    \visible<1-5>{\node at (2,-1.5) {\pgfuseimage{rviz}};}
+    \visible<2-5>{\node at (3.5,-1.5) {\pgfuseimage{rosbag-slam}};}
+    \visible<3-5>{\node at (5,-1.5) {\pgfuseimage{rxplot}};}
+    \visible<4-5>{\node at (6.5,-1.5) {\pgfuseimage{rxgraph}};}
+    \visible<5>{\node at (8,-1.5) {\pgfuseimage{rqt}};}
+  \end{tikzpicture}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -270,8 +270,6 @@ ROS est l'outil qui a permis ce passage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Installation de ROS - Hydro - Ubuntu 12.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
-  %\draw[help lines] (0,-3) grid (5,0);         
-  %\node at (0,0) {(0,0)};
   \matrix[anchor=west] at (0,-2.5)
   {
     \node[roslist] (instros1) 
@@ -299,8 +297,6 @@ ROS est l'outil qui a permis ce passage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
-  %\draw[help lines] (0,-3) grid (5,0);         
-  %\node at (0,0) {(0,0)};
   \matrix[anchor=west] at (0,-2.5)
   {
     \node[roslist] 
@@ -314,8 +310,8 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {3 - Création de l'espace catkin};\\
     \node[roscode] 
-      {mkdir -p ~/catkin ws/src \\
-       cd ~/catkin ws/src \\
+      {mkdir -p ~/catkin\_ws/src \\
+       cd ~/catkin\_ws/src \\
        catkin init workspace}; \\
     \node {\tiny Tutorial Installing and Confixguring Your ROS Environment :}; \\
     \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}}; \\
@@ -325,14 +321,12 @@ ROS est l'outil qui a permis ce passage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
-  %\draw[help lines] (0,-3) grid (5,0);         
-  %\node at (0,0) {(0,0)};
-  \matrix[anchor=west] at (0,0)
+  \matrix[anchor=west] at (0,-1.0)
   {
     \node[roslist] 
       {4 - Ligne à ajouter au fichier .bashrc}; \\
     \node[roscode] 
-      {source \$HOME/catkin ws/devel/setup.bash}; \\
+      {source \$HOME/catkin\_ws/devel/setup.bash}; \\
     \node {\tiny Tutorial Installing and Confixguring Your ROS Environment :}; \\
     \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}}; \\
   };
@@ -343,8 +337,6 @@ ROS est l'outil qui a permis ce passage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{ROS Filesystem - Navigation - Hydro}
 \begin{tikzpicture}[remember picture, overlay]        
-  %\draw[help lines] (0,-3) grid (5,0);         
-  %\node at (0,0) {(0,0)};
   \matrix[anchor=west] at (0,-2.5)
   {
     \node[roslist] 
@@ -425,33 +417,502 @@ ROS est l'outil qui a permis ce passage.
 }
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Définitions}
+\begin{frame}{Paquets dans un workspace catkin - (2/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] 
+      {1 - Aller dans le répertoire src du paquet}; \\
+    \node[roscode] 
+      {cd /catkin\_ws/src}; \\
+    \node[roslist]
+    {Pour créer un nouveau package, et ses dépendences:\\
+      {\bf catkin\_create\_pkg}}; \\
+    \node[roscode]
+    {catkin create pkg beginner tutorials std msgs rospy roscpp\\
+      catkin create pkg [package name] [depend1] [depend2] [depend3]};\\
+  };
+\end{tikzpicture}  
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Paquets dans un workspace catkin - (3/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] 
+      {2 - Dépendences du premier ordre}; \\
+    \node[roscode] 
+      {rospack depends1 beginner\_tutorials}; \\
+    \node {\footnotesize Dépendences standards: std\_msgs rospy roscpp };\\
+    \node[roslist]
+    {3 - Les dépendences sont stockées dans le fichier package.xml}; \\
+    \node[roscode]
+    {roscd beginner\_tutorials\\
+     cat package.xml};\\
+    \node[roslist]
+    { \footnotesize
+      $<$package$>$\\
+      ...\\
+      $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$\\
+      $<$build\_depend$>$roscpp$<$/build\_depend$>$\\
+      ...\\
+      $<$/package$>$
+    };\\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Paquets dans un workspace catkin - (4/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] 
+      {4 - Dépendences indirectes d'un paquet}; \\
+    \node[roscode] 
+      {rospack depends beginner\_tutorials}; \\
+    \node[roslist]
+    { \footnotesize$<$package$>$\\
+      cpp\_common\\
+      rostime\\
+      roscpp\_traits\\
+      roscpp\_serialization\\
+      ...\\
+      roslib\\
+     rospy \\
+      $<$/package$>$
+    };\\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Personnalisation du paquet - (5/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist] 
+      {5 - Description du paquet}; \\
+    \node[roscode] 
+      {$<$description$>$The beginner\_tutorials package$<$/description$>$}; \\
+    \node[roscode]
+    { \footnotesize$<$package$>$\\
+      $<$!- One maintainer tag required, multiple allowed, one person per tag -$>$ \\
+      $<$!- Exemple : -$>$ \\
+      $<$!- $<$maintainer email="jane.doe@example.com"$>$Jane Doe$<$/maintainer$>$ -$>$ \\
+      $<$maintainer email="user@todo.todo"$>$user$<$/maintainer$>$\\
+    };\\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Personnalisation du paquet - (6/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist]{7 - License du paquet}; \\
+    \node[roscode] 
+      {
+        $<$!- One license tag required, multiple allowed, one license per tag -$>$ \\
+        $<$!- Commonly used license strings : -$>$\\
+        $<$!- BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1,LGPLv3 -$>$\\
+        $<$license$>$TODO$<$/license$>$ }; \\
+    \node[roslist]{La license souvent utilisée sous ROS est la BSD};\\
+    \node[roscode]{ $<$license$>$BSD$<$/license$>$ };\\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Personnalisation du paquet - (7/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist]{8 - Spécification des dépendences}; \\
+    \node[roscode] 
+      {\tiny $<$!- The * depend tags are used to specify dependencies -$>$ \\
+       $<$!- Dependencies can be catkin packages or system dependencies -$>$ \\
+       $<$!- Exemples : -$>$ \\
+       $<$!- Use build depend for packages you need at compile time : -$>$ \\
+       $<$!- $<$build depend$>$genmsg$<$/build depend$>$ -$>$\\
+       $<$!- Use buildtool depend for build tool packages : -$>$\\
+       $<$!- $<$buildtool depend$>$catkin$<$/buildtool depend$>$ -$>$\\
+       $<$!- Use run depend for packages you need at runtime : -$>$\\
+       $<$!- $<$run depend$>$python-yaml$<$/run depend$>$ -$>$\\
+       $<$!- Use test depend for packages you need only for testing : -$>$\\
+       $<$!- $<$test depend$>$gtest$<$/test depend$>$ -$>$\\
+       $<$buildtool depend$>$catkin$<$/buildtool depend$>$\\
+       $<$build depend$>$roscpp$<$/build depend$>$\\
+       $<$build depend$>$rospy$<$/build depend$>$\\
+       $<$build depend$>$std msgs$<$/build depend$>$ }; \\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Personnalisation du paquet - (8/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist]{9 - Ajout de la dépendence à l'exécution:}; \\
+    \node[roscode] 
+      { 
+        $<$buildtool depend$>$catkin$<$/buildtool depend$>$\\
+        $<$build depend$>$roscpp$<$/build depend$>$\\
+        $<$build depend$>$rospy$<$/build depend$>$\\
+        $<$build depend$>$std msgs$<$/build depend$>$\\
+        $<$run depend$>$roscpp$<$/run depend$>$\\
+        $<$run depend$>$rospy$<$/run depend$>$\\
+        $<$run depend$>$std msgs$<$/run depend$>$
+      }; \\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Personnalisation du paquet - (9/9) - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  %\draw[help lines] (0,-3) grid (5,0);         
+  %\node at (0,0) {(0,0)};
+  \matrix[anchor=west] at (0,-2.5)
+  {
+    \node[roslist]{10 - Fichier \textcolor{blue}{package.xml} final}; \\
+    \node[roscode] 
+      { \tiny 
+        $<$?xml version="1.0" ?$>$ \\
+        $<$package$>$ \\
+        $<$name$>$beginner tutorials$<$/name$>$\\
+        $<$version$>$0.1.0$<$/version$>$ \\
+        $<$description$>$The beginner tutorials package$<$/description$>$ \\
+        $<$maintainer email="you@yourdomain.tld"$>$Your Name$<$/maintainer$>$\\
+        $<$license$>$BSD$<$/license$>$ \\
+        $<$url type="website"$>$http ://wiki.ros.org/beginner tutorials$<$/url$>$ \\
+        $<$author email="you@yourdomain.tld"$>$Jane Doe$<$/author$>$ \\
+        $<$buildtool depend$>$catkin$<$/buildtool depend$>$ \\
+        $<$build depend$>$roscpp$<$/build depend$>$ \\
+        $<$build depend$>$rospy$<$/build depend$>$ \\
+        $<$build depend$>$std msgs$<$/build depend$>$ \\
+        $<$run depend$>$roscpp$<$/run depend$>$ \\
+        $<$run depend$>$rospy$<$/run depend$>$ \\
+        $<$run depend$>$std msgs$<$/run depend$>$ \\
+        $<$/package$>$
+      }; \\
+  };
+\end{tikzpicture}  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Compilation des paquets Hydro}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+    {
+      \node[roslist]{
+        La compilation de tous les paquets s'effectue avec une seule commande.\\
+        Cette commande doit s'effectuer dans le répertoire du workspace.\\
+        Le répertoire {\bf build} du workspace stocke les objets compilés intermédiaires.\\
+        Le répertoire {\bf devel} du workspace stocke les exécutables et les
+        librairies compilées.\\
+      };\\
+      \node[roscode]{
+        catkin\_make \\
+        catkin\_make install\\
+      };\\
+    };
+  \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Graphe d'applications avec ROS}
+  \begin{itemize}
+    \item[Nodes]: Un node est un exécutable qui utilise ROS pour communiquer 
+      avec d'autres noeuds.     
+    \item[Messages]: Types de données ROS utilisés pour souscrire ou publié sur un topic.
+    \item[Topics]: Les nodes peuvent \textit{publier} des messages sur un topic 
+      aussi bien que \textit{souscrire} à un topic pour recevoir des messages.
+    \item[Master]: Nom du service pour ROS (i.e. aide les noeuds à se trouver
+      mutuellement).
+    \item[rosout]: Equivalent de stdout/stderr.
+    \item[roscore]: Master+rosout+parameter server (serveur de paramètres,
+      introduit plus tard).
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Définitions - Node}
+  \begin{itemize}
+    \item Un fichier éxecutable dans un paquet ROS. 
+    \item Les noeuds ROS utilisent une librairie client pour communiquer avec 
+      les autres noeuds.
+    \item Les noeuds peuvent \textbf{publier} ou \textbf{souscrire} à des 
+      \textbf{topics}.
+    \item Les noeuds peuvent fournir ou utiliser un \textbf{service}.
+    \item Les librairies client sont :
+      \begin{itemize}
+        \item \textit{rospy} pour python.
+        \item \textit{roscpp} pour C++.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Communications ROS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{}
+\subsection{roscore}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Le système des Name services}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {Pour pouvoir localiser et interagir entre les nodes il faut un \textbf{annuaire}.\\
+        C'est le rôle de \textbf{roscore}.};\\
+        \node[roslist]
+        {Il doit être lancé \textit{systématiquement} mais une seule fois.\\
+         Si \textbf{roscore} ne se lance pas, il faut :
+         \begin{itemize}
+           \item Vérifier la connection réseau.
+           \item Si roscore ne s'initialise pas et évoque un problème de droits, 
+            il faut vérifier les droits sur le répertoire .ros
+         \end{itemize}
+        };\\
+        \node[roslist]
+        { \tiny
+           Tutorial Understanding ROS Nodes : \url{http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes}
+        };\\
+     };
+  \end{tikzpicture}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Le système des Name services}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {Pour obtenir la liste des nodes actifs :};\\
+        \node[roscode]
+        {rosnode list};\\
+        \node[roslist]
+        {Pour obtenir des informations sur un node :};\\
+        \node[roscode]
+        {rosnode info /rosout};\\
+         \node[roslist]
+        {\tiny Tutorial Understanding ROS Nodes : \url{http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes}};\\
+      };
+   \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rosrun}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Utilisation de rosrun}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {Pour pouvoir lancer un fichier exécutable/node d'un paquet}; \\
+        \node[roscode]
+        {rosrun [package\_name][node\_name]}; \\
+        \node[roslist]
+        {Par exemple pour lancer turtlesim :}; \\
+        \node[roscode]
+        {rosrun turtlesim turtlesim\_node}; \\
+        \node[roslist]
+        {Pour renommer des arguments (utiliser rosnode list pour vérifier) :};\\
+        \node[roscode]
+        {rosrun turtlesim turtlesim\_node \_\_name:=my\_turtle};\\
+        \node[roslist]
+        {Pour tester si le node est actif};\\
+        \node[roscode]
+        {rosnode ping my\_turtle};\\
+        \node[roslist]
+        {\tiny Tutorial Understanding ROS Nodes : \url{http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes}};\\
+      };
+   \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comprendre les topics - Préparation}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {Pour démarrer turtle\_sim et turtle\_teleop\_key};\\
+        \node[roscode]
+        {rosrun turtlesim turtlesim\_node\\
+         rosrun turtlesim turtle\_teleop\_key};\\
+        \node[roslist]
+        {Démarrer le graphe de l'application :};\\
+        \node[roscode]
+        {rosrun rqt\_graph rqt\_graph};\\
+        \node[roslist]
+        {Démarrer le graphe de l'affichage des topics:};\\
+        \node[roscode]
+        {rosrun rqt\_plot rqt\_plot};\\
+        \node[roslist]
+        {\tiny Tutorial Understanding ROS Topics : \url{http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics}};\\
+      };
+   \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rostopic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comprendre les topics - \textbf{rostopic}}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {Les topics sont des données \textbf{publiées} par des noeuds,
+        et auquelles les noeuds \textbf{souscrivent}.\\
+        L'exécutable permettant d'avoir des informations sur les topics
+        est \textbf{rostopic}.};\\
+        \node[roscode]
+        {rostopic bw display bandwith used by topic\\
+         rostopic echo print messages to screen\\
+         rostopic hz display publishing rate of topic\\
+         rostopic list print information about active topics\\
+         rostopic pub publish data to topic\\
+         rostopic type print topic type
+        };\\
+        \node[roslist]
+        {\tiny Tutorial Understanding ROS Topics : \url{http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics}};\\
+      };
+   \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{roswtf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Vérifier son installation ros - \textbf{roswtf}}
+  Ce programme vérifie l'installation de ROS et analyse les problèmes.
+  \begin{itemize}       
+    \item Effectue le test suivant le répertoire.
+    \item Vérifie la cohérence de l'installation : variables d'environnements,
+      paquets installés.
+    \item Analyse le graphe en cours d'exécution.
+  \end{itemize}
+  {\tiny Tutorial Getting started with roswtf : \url{http://wiki.ros.org/ROS/Tutorials/Getting\%20started\%20with\%20roswtf}};
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rqt\_console}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{rqt - \textbf{rqt\_console}}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {\textbf{rqt} est une interface d'affichage non 3D qui se peuple avec des plugins. 
+          Elle permet de construire une interface de contrôle incrémentalement.
+          L'exécutable permettant d'afficher les messages des noeuds de façon centralisé 
+          est \textbf{rqt\_console}.};\\
+        \node[roscode]
+        { rosrun rqt\_console rqt\_console \\
+          rosrun rqt\_logger\_level rqt\_logger\_level
+        };\\
+        \node[roslist]
+        {\tiny Tutorial Using rqt console et roslaunch \url{http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch}};\\
+      };
 
+  \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{roslaunch}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Lancer plusieurs noeuds - \textbf{roslaunch}}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {\textbf{roslaunch} lit un fichier xml qui contient tous les paramètres
+          pour lancer une application distribuée ROS.};\\
+        \node[roscode]
+        {roslaunch [package] [filename.launch]};\\
+        \node[roslist]
+        {Exemple :};\\
+        \node[roscode]
+        {roscd beginner tutorials\\
+          roslaunch beginner tutorials turtlemimic.launch
+        };\\
+        \node[roslist]
+        {\tiny Tutorial Using rqt console et roslaunch \url{http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch}};\\
+      };
+  \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rosed}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Spécifier l'éditeur pour ROS - \textbf{rosed}}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {\textbf{roslaunch} permet d'éditer un fichier directement par le nom du paquet
+          et non par le chemin entier. Il inclut la complétion par <Tab>.};\\
+        \node[roscode]
+        {rosed [package] [filename]};\\
+        \node[roslist]
+        {Exemple :};\\
+        \node[roscode]
+        {rosed roscpp Logger.msg};      \\
+        \node[roslist]
+        {L'éditeur utilisé est spécifié par la variable d'environnement EDITOR};\\
+        \node[roscode]
+        {export EDITOR='emacs'};\\
+        \node[roslist]
+        {\tiny Tutorial Using rosed to edit files in ROS \url{http://wiki.ros.org/ROS/Tutorials/UsingRosEd}};\\
+      };
+  \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{rosbag}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Enregistrer des données  - \textbf{rosbag}}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {\textbf{rosbag} permet d'enregistrer et de rejouer des données sur votre application.\\
+        Pour enregistrer un sac de données :};       \\
+        \node[roscode]
+        {rosbag record -a \\
+         rosbag record -O subset /turtle1/command velocity /turtle1/pose};\\
+        \node[roslist]
+        {Le nom du fichier démarre avec l'année, la date et le temps et le suffixe .bag};\\
+        \node[roslist]
+        {\tiny Tutorial Recording and play back data \url{http://wiki.ros.org/ROS/Tutorials/Recording\%20and\%20playing\%20back\%20data}};\\
+      };
+  \end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Enregistrer des données  - \textbf{rosbag}}
+  \begin{tikzpicture}[remember picture, overlay]
+    \matrix[anchor=west] at (0,-2.5)
+      {
+        \node[roslist]
+        {\textbf{rosbag} permet d'enregistrer et de rejouer des données sur votre application.\\
+        Pour enregistrer un sac de données :};       \\
+        \node[roscode]
+        {rosbag record -a \\
+         rosbag record -O subset /turtle1/command velocity /turtle1/pose};\\
+        \node[roslist]
+        {Le nom du fichier démarre avec l'année, la date et le temps et le suffixe .bag};\\
+        \node[roslist]
+        {\tiny Tutorial Recording and play back data \url{http://wiki.ros.org/ROS/Tutorials/Recording\%20and\%20playing\%20back\%20data}};\\
+      };
+  \end{tikzpicture}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Programmer avec ROS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{La librairie TF}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Programmer un noeud ROS}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Conclusions}
+\begin{frame}{Tutorials couverts par cette partie}
+  \begin{itemize}
+    \item \href{http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv}{Création de fichiers ROS msg and srv}
+    \item \href{http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber\%28c\%2B\%2B\%29}{Ecrire un simple souscripteur et publieur (C++)}
+    \item \href{http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber\%28python\%29}{Ecrire un simple souscripteur et publieur (Python)}
+    \item \href{http://wiki.ros.org/ROS/Tutorials/WritingServiceClient\%28c\%2B\%2B\%29}{Ecrire un simple service et un client (C++)}
+    \item \href{http://wiki.ros.org/ROS/Tutorials/WritingServiceClient\%28python\%29}{Ecrire un simple service et un client (Python)}
+    \item \href{http://wiki.ros.org/ROS/Tutorials/ExaminingServiceClient}{Faire fonctionner ensemble le client simple et le service simple.}
+  \end{itemize}
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-
 \end{document}
 
