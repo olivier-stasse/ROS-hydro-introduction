@@ -178,6 +178,7 @@ ROS est l'outil qui a permis ce passage.
     \item[rosbag] Enregistrement et visualisation des données.
     \item[rxplot] Affichage en ligne.
     \item[rxgraph] Visualisation du système.
+    \item[rqt] Interface graphique de contrôle incrémentale
     \item[catkin] Système de compilation et de gestion de paquets.
   \end{itemize}
   \begin{tikzpicture}[remember picture,overlay]
@@ -227,6 +228,7 @@ ROS est l'outil qui a permis ce passage.
 \begin{frame}
 \frametitle{ROS: Bref historique}
  \vskip -0.25cm
+% {\footnotesize
  \begin{tabular}{|p{3cm}|p{7.5cm}|} \hline 
    2008 & Démarrage de ROS par Willow Garage \\ 
    2010 - Janvier & ROS 1.0 \\
@@ -238,9 +240,12 @@ ROS est l'outil qui a permis ce passage.
    2012 - Décembre & Groovy Galapagos\\
    2013 - Février & Open Source Robotics Fundation poursuit la gestion de ROS \\
    2013 - Aout & Willow Garage est absorbé par Suitable Technologies \\
-   2013 - Aout & PR-2 is supported now by Clearpath Robotics\\
-   2013 - Septembre& Hydro Medusa \\ \hline
+   2013 - Aout & Le support de PR-2 est repris par Clearpath Robotics\\
+   2013 - Septembre& Hydro Medusa (prévu) \\ 
+   2014 - Juillet & Indigo Igloo \\ 
+   2015 - May & Jade Turtle \\ \hline
  \end{tabular}
+% }
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -280,7 +285,7 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {2 - Spécifications des clefs}; \\
     \node[roscode] 
-      {wget http ://packages.ros.org/ros.key -O - | sudo apt-key add -};\\
+      {wget http ://packages.ros.org/ros.key -O - $|$ sudo apt-key add -};\\
     \node[roslist] 
       {3 - Mise à jour des listes de paquets};\\
     \node[roscode] 
@@ -302,7 +307,7 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {1 - Spécifications de ROS\_ROOT et ROS PACKAGE PATH }; \\
     \node[roscode] 
-      {export j grep ROS}; \\
+      {export $|$ grep ROS}; \\
     \node[roslist] 
       {2 - Ligne à ajouter au fichier .bashrc}; \\
     \node[roscode] 
@@ -626,6 +631,8 @@ ROS est l'outil qui a permis ce passage.
     };
   \end{tikzpicture}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Définitions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Graphe d'applications avec ROS}
   \begin{itemize}
