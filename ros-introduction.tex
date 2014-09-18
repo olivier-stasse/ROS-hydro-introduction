@@ -104,15 +104,14 @@
               Gepetto, \\
               LAAS CNRS
             }; 
-       \node [xshift=-3.1cm,yshift=-0.8cm,
+       \node [xshift=-3.1cm,yshift=-1.0cm,
               fill=white!10,fill opacity=0.7,
-              right,text width=3cm]
+              right,text width=4cm]
         (author) 
         at (current page.center)
             {
               AIP, Toulouse\\
-              $15-19$ Septembre
-              2014
+              $15-19$ Septembre 2014
             }; 
     \end{tikzpicture}
   \end{frame}
@@ -307,7 +306,7 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {1 - Spécifications de ROS\_ROOT et ROS PACKAGE PATH }; \\
     \node[roscode] 
-      {export $|$ grep ROS}; \\
+      {env $|$ grep ROS}; \\
     \node[roslist] 
       {2 - Ligne à ajouter au fichier .bashrc}; \\
     \node[roscode] 
@@ -315,9 +314,9 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {3 - Création de l'espace catkin};\\
     \node[roscode] 
-      {mkdir -p ~/catkin\_ws/src \\
-       cd ~/catkin\_ws/src \\
-       catkin init workspace}; \\
+      {mkdir -p \textasciitilde/catkin\_ws/src \\
+       cd \textasciitilde/catkin\_ws/src \\
+       catkin\_init\_workspace}; \\
     \node {\tiny Tutorial Installing and Confixguring Your ROS Environment :}; \\
     \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}}; \\
   };
@@ -332,22 +331,44 @@ ROS est l'outil qui a permis ce passage.
       {4 - Ligne à ajouter au fichier .bashrc}; \\
     \node[roscode] 
       {source \$HOME/catkin\_ws/devel/setup.bash}; \\
-    \node {\tiny Tutorial Installing and Confixguring Your ROS Environment :}; \\
+    \node {\tiny Tutorial Installing and Configuring Your ROS Environment :}; \\
     \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment}}; \\
   };
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Navigation dans ROS Hydro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{ROS Filesystem - Navigation - Hydro}
+\begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-2.5)
   {
     \node[roslist] 
-      {1 - rospack : Donne les informations sur les paquets}; \\
+      { Votre distribution ROS est indiquée par ROS\_DISTRO }; \\
     \node[roscode] 
-      {rospack find}; \\
+      {ROS\_DISTRO=hydro }; \\
+    \node[roslist]
+      { L'annuaire de votre application est spécifié par ROS\_MASTER\_URI};\\
+    \node[roscode] 
+      {ROS\_MASTER\_URI=http://localhost:11311 \\
+       ROS\_MASTER\_URI=http://hostname:port\_number \\}; \\
+    \node[roslist]
+      {\textbf{hostname} dans ROS\_MASTER\_URI indique l'ordinateur où \textbf{roscore} est lancé.
+        \textbf{port\_number} indique le port où \textbf{roscore} attend les connections. 
+      };\\
+  };
+\end{tikzpicture}  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Navigation dans ROS Hydro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{ROS Filesystem - Navigation - Hydro}
+\begin{tikzpicture}[remember picture, overlay]        
+  \matrix[anchor=west] at (0,-3.0)
+  {
+    \node[roslist] 
+      {1 - rospack : Donne les informations sur les paquets (exemple roscpp)}; \\
+    \node[roscode] 
+      {rospack find roscpp}; \\
     \node[roslist] 
       {2 - roscd : Bascule le répertoire directement sur le paquet}; \\
     \node[roscode] 
@@ -434,8 +455,8 @@ ROS est l'outil qui a permis ce passage.
     {Pour créer un nouveau package, et ses dépendences:\\
       {\bf catkin\_create\_pkg}}; \\
     \node[roscode]
-    {catkin create pkg beginner tutorials std msgs rospy roscpp\\
-      catkin create pkg [package name] [depend1] [depend2] [depend3]};\\
+    {catkin\_create\_pkg beginner\_tutorials std\_msgs rospy roscpp\\
+     catkin\_create\_pkg [package\_name] [depend1] [depend2] [depend3]};\\
   };
 \end{tikzpicture}  
 \end{frame}
@@ -545,18 +566,18 @@ ROS est l'outil qui a permis ce passage.
       {\tiny $<$!- The * depend tags are used to specify dependencies -$>$ \\
        $<$!- Dependencies can be catkin packages or system dependencies -$>$ \\
        $<$!- Exemples : -$>$ \\
-       $<$!- Use build depend for packages you need at compile time : -$>$ \\
-       $<$!- $<$build depend$>$genmsg$<$/build depend$>$ -$>$\\
-       $<$!- Use buildtool depend for build tool packages : -$>$\\
-       $<$!- $<$buildtool depend$>$catkin$<$/buildtool depend$>$ -$>$\\
-       $<$!- Use run depend for packages you need at runtime : -$>$\\
-       $<$!- $<$run depend$>$python-yaml$<$/run depend$>$ -$>$\\
+       $<$!- Use build\_depend for packages you need at compile time : -$>$ \\
+       $<$!- $<$build\_depend$>$genmsg$<$/build\_depend$>$ -$>$\\
+       $<$!- Use buildtool\_depend for build tool packages : -$>$\\
+       $<$!- $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$ -$>$\\
+       $<$!- Use run\_depend for packages you need at runtime : -$>$\\
+       $<$!- $<$run\_depend$>$python-yaml$<$/run\_depend$>$ -$>$\\
        $<$!- Use test depend for packages you need only for testing : -$>$\\
        $<$!- $<$test depend$>$gtest$<$/test depend$>$ -$>$\\
-       $<$buildtool depend$>$catkin$<$/buildtool depend$>$\\
-       $<$build depend$>$roscpp$<$/build depend$>$\\
-       $<$build depend$>$rospy$<$/build depend$>$\\
-       $<$build depend$>$std msgs$<$/build depend$>$ }; \\
+       $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$\\
+       $<$build\_depend$>$roscpp$<$/build\_depend$>$\\
+       $<$build\_depend$>$rospy$<$/build\_depend$>$\\
+       $<$build\_depend$>$std msgs$<$/build\_depend$>$ }; \\
   };
 \end{tikzpicture}  
 \end{frame}
@@ -570,13 +591,13 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist]{9 - Ajout de la dépendence à l'exécution:}; \\
     \node[roscode] 
       { 
-        $<$buildtool depend$>$catkin$<$/buildtool depend$>$\\
-        $<$build depend$>$roscpp$<$/build depend$>$\\
-        $<$build depend$>$rospy$<$/build depend$>$\\
-        $<$build depend$>$std msgs$<$/build depend$>$\\
-        $<$run depend$>$roscpp$<$/run depend$>$\\
-        $<$run depend$>$rospy$<$/run depend$>$\\
-        $<$run depend$>$std msgs$<$/run depend$>$
+        $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$\\
+        $<$build\_depend$>$roscpp$<$/build\_depend$>$\\
+        $<$build\_depend$>$rospy$<$/build\_depend$>$\\
+        $<$build\_depend$>$std msgs$<$/build\_depend$>$\\
+        $<$run\_depend$>$roscpp$<$/run\_depend$>$\\
+        $<$run\_depend$>$rospy$<$/run\_depend$>$\\
+        $<$run\_depend$>$std msgs$<$/run\_depend$>$
       }; \\
   };
 \end{tikzpicture}  
@@ -593,20 +614,20 @@ ROS est l'outil qui a permis ce passage.
       { \tiny 
         $<$?xml version="1.0" ?$>$ \\
         $<$package$>$ \\
-        $<$name$>$beginner tutorials$<$/name$>$\\
+        $<$name$>$beginner\_tutorials$<$/name$>$\\
         $<$version$>$0.1.0$<$/version$>$ \\
         $<$description$>$The beginner tutorials package$<$/description$>$ \\
         $<$maintainer email="you@yourdomain.tld"$>$Your Name$<$/maintainer$>$\\
         $<$license$>$BSD$<$/license$>$ \\
         $<$url type="website"$>$http ://wiki.ros.org/beginner tutorials$<$/url$>$ \\
         $<$author email="you@yourdomain.tld"$>$Jane Doe$<$/author$>$ \\
-        $<$buildtool depend$>$catkin$<$/buildtool depend$>$ \\
-        $<$build depend$>$roscpp$<$/build depend$>$ \\
-        $<$build depend$>$rospy$<$/build depend$>$ \\
-        $<$build depend$>$std msgs$<$/build depend$>$ \\
-        $<$run depend$>$roscpp$<$/run depend$>$ \\
-        $<$run depend$>$rospy$<$/run depend$>$ \\
-        $<$run depend$>$std msgs$<$/run depend$>$ \\
+        $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$ \\
+        $<$build\_depend$>$roscpp$<$/build\_depend$>$ \\
+        $<$build\_depend$>$rospy$<$/build\_depend$>$ \\
+        $<$build\_depend$>$std msgs$<$/build\_depend$>$ \\
+        $<$run\_depend$>$roscpp$<$/run\_depend$>$ \\
+        $<$run\_depend$>$rospy$<$/run\_depend$>$ \\
+        $<$run\_depend$>$std msgs$<$/run\_depend$>$ \\
         $<$/package$>$
       }; \\
   };
@@ -643,6 +664,8 @@ ROS est l'outil qui a permis ce passage.
       aussi bien que \textit{souscrire} à un topic pour recevoir des messages.
     \item[Master]: Nom du service pour ROS (i.e. aide les noeuds à se trouver
       mutuellement).
+    \item[{\footnotesize Paramètres}]: Informations très peu dynamiques qui doivent être partagés
+      dans l'application.
     \item[rosout]: Equivalent de stdout/stderr.
     \item[roscore]: Master+rosout+parameter server (serveur de paramètres,
       introduit plus tard).
@@ -837,8 +860,8 @@ ROS est l'outil qui a permis ce passage.
         \node[roslist]
         {Exemple :};\\
         \node[roscode]
-        {roscd beginner tutorials\\
-          roslaunch beginner tutorials turtlemimic.launch
+        {roscd beginner\_tutorials\\
+          roslaunch beginner\_tutorials turtlemimic.launch
         };\\
         \node[roslist]
         {\tiny Tutorial Using rqt console et roslaunch \url{http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch}};\\
@@ -854,7 +877,7 @@ ROS est l'outil qui a permis ce passage.
       {
         \node[roslist]
         {\textbf{roslaunch} permet d'éditer un fichier directement par le nom du paquet
-          et non par le chemin entier. Il inclut la complétion par <Tab>.};\\
+          et non par le chemin entier. Il inclut la complétion par $<$Tab$>$.};\\
         \node[roscode]
         {rosed [package] [filename]};\\
         \node[roslist]
@@ -882,25 +905,7 @@ ROS est l'outil qui a permis ce passage.
         Pour enregistrer un sac de données :};       \\
         \node[roscode]
         {rosbag record -a \\
-         rosbag record -O subset /turtle1/command velocity /turtle1/pose};\\
-        \node[roslist]
-        {Le nom du fichier démarre avec l'année, la date et le temps et le suffixe .bag};\\
-        \node[roslist]
-        {\tiny Tutorial Recording and play back data \url{http://wiki.ros.org/ROS/Tutorials/Recording\%20and\%20playing\%20back\%20data}};\\
-      };
-  \end{tikzpicture}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Enregistrer des données  - \textbf{rosbag}}
-  \begin{tikzpicture}[remember picture, overlay]
-    \matrix[anchor=west] at (0,-2.5)
-      {
-        \node[roslist]
-        {\textbf{rosbag} permet d'enregistrer et de rejouer des données sur votre application.\\
-        Pour enregistrer un sac de données :};       \\
-        \node[roscode]
-        {rosbag record -a \\
-         rosbag record -O subset /turtle1/command velocity /turtle1/pose};\\
+         rosbag record -O subset /turtle1/cmd\_vel /turtle1/pose};\\
         \node[roslist]
         {Le nom du fichier démarre avec l'année, la date et le temps et le suffixe .bag};\\
         \node[roslist]
