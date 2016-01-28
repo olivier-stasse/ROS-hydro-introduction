@@ -100,7 +100,7 @@
              (author) at (current page.center) [scale=0.7]
             {
               Olivier STASSE, \\
-              CR-1, CNRS, \\
+              DR-2, CNRS, \\
               Gepetto, \\
               LAAS CNRS
             }; 
@@ -111,7 +111,7 @@
         at (current page.center)
             {
               AIP, Toulouse\\
-              $15-19$ Septembre 2014
+              Février 2016
             }; 
     \end{tikzpicture}
   \end{frame}
@@ -378,7 +378,7 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {3 - rosls : Affiche le contenu du répertoire d'un paquet};\\
     \node[roscode] 
-      {rosls roscpp tutorials}; \\
+      {rosls roscpp\_tutorials}; \\
     \node {\tiny Tutorial Navigation dans le système de fichiers }; \\
     \node {\tiny \url{http://wiki.ros.org/ROS/Tutorials/NavigatingTheFilesystem}}; \\
   };
@@ -450,7 +450,7 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {1 - Aller dans le répertoire src du paquet}; \\
     \node[roscode] 
-      {cd /catkin\_ws/src}; \\
+      {cd \~ /catkin\_ws/src}; \\
     \node[roslist]
     {Pour créer un nouveau package, et ses dépendences:\\
       {\bf catkin\_create\_pkg}}; \\
@@ -577,7 +577,7 @@ ROS est l'outil qui a permis ce passage.
        $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$\\
        $<$build\_depend$>$roscpp$<$/build\_depend$>$\\
        $<$build\_depend$>$rospy$<$/build\_depend$>$\\
-       $<$build\_depend$>$std msgs$<$/build\_depend$>$ }; \\
+       $<$build\_depend$>$std\_msgs$<$/build\_depend$>$ }; \\
   };
 \end{tikzpicture}  
 \end{frame}
@@ -594,10 +594,10 @@ ROS est l'outil qui a permis ce passage.
         $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$\\
         $<$build\_depend$>$roscpp$<$/build\_depend$>$\\
         $<$build\_depend$>$rospy$<$/build\_depend$>$\\
-        $<$build\_depend$>$std msgs$<$/build\_depend$>$\\
+        $<$build\_depend$>$std\_msgs$<$/build\_depend$>$\\
         $<$run\_depend$>$roscpp$<$/run\_depend$>$\\
         $<$run\_depend$>$rospy$<$/run\_depend$>$\\
-        $<$run\_depend$>$std msgs$<$/run\_depend$>$
+        $<$run\_depend$>$std\_msgs$<$/run\_depend$>$
       }; \\
   };
 \end{tikzpicture}  
@@ -624,10 +624,10 @@ ROS est l'outil qui a permis ce passage.
         $<$buildtool\_depend$>$catkin$<$/buildtool\_depend$>$ \\
         $<$build\_depend$>$roscpp$<$/build\_depend$>$ \\
         $<$build\_depend$>$rospy$<$/build\_depend$>$ \\
-        $<$build\_depend$>$std msgs$<$/build\_depend$>$ \\
+        $<$build\_depend$>$std\_msgs$<$/build\_depend$>$ \\
         $<$run\_depend$>$roscpp$<$/run\_depend$>$ \\
         $<$run\_depend$>$rospy$<$/run\_depend$>$ \\
-        $<$run\_depend$>$std msgs$<$/run\_depend$>$ \\
+        $<$run\_depend$>$std\_msgs$<$/run\_depend$>$ \\
         $<$/package$>$
       }; \\
   };
@@ -752,7 +752,7 @@ ROS est l'outil qui a permis ce passage.
         \node[roslist]
         {Pour renommer des arguments (utiliser rosnode list pour vérifier) :};\\
         \node[roscode]
-        {rosrun turtlesim turtlesim\_node \_\_name:=my\_turtle};\\
+        {rosrun turtlesim turtlesim\_node --name:=my\_turtle};\\
         \node[roslist]
         {Pour tester si le node est actif};\\
         \node[roscode]
