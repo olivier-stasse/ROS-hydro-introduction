@@ -97,7 +97,7 @@
   \begin{tikzpicture}[remember picture, overlay]
     %HRP-2
     \node[inner sep=0pt,scale=0.5] (hrp2) at (7.5,-3.0) {%
-      \includegraphics[width=3.5cm]{images/PR2-robot-2.jpeg}%
+      \includegraphics[width=3.5cm]{images/Pyrene/PyreneStandingWithArmUp.png}%
     };    
     \node[inner sep=0pt,scale=1.1] at (10.0,-2.5) {%
       Environnement
@@ -125,7 +125,7 @@
     % Représentation de l'environnement
     \node [text centered, text width = 3.2cm, rectangle,draw,fill=blue!10!white] 
     (worldmap)
-    at (2.0,-0.75) {Représen    tation\\ de l'environnement};
+    at (2.0,-0.75) {Représentation\\ de l'environnement};
     %
     % Contrôle
     \node [text centered, text width = 1.75cm, rectangle,draw,fill=blue!10!white] 
@@ -182,11 +182,11 @@
     {PC - Contr\^{o}le};
 
     \node[text centered, text width = 4.5cm] 
-    (pcmotionplanning) at (1.05,-5.0) 
+    (pcmotionplanning) at (0.75,-5.0) 
     {PC - Motion Planning};
 
     \node[text centered, text width = 4.5cm] 
-    (pctaskplanning) at (-0.5,-3.25) 
+    (pctaskplanning) at (0.125,-3.25) 
     {PC - Task Planning};
  \end{tikzpicture}
 }
@@ -258,7 +258,9 @@
      %\draw[help lines] (-6,-3) grid (5,0);         
      %\node at (0,0) {(0,0)};
      \node[right] at (-3.0,-0.3) {\tiny 01/05/2014 : 111 Robots supportés sur \url{http://wiki.ros.org/Robots}};
+     \node[right] at (-3.0,-0.575) {\tiny 25/04/2017 : 27 Robots supportés sur \url{http://wiki.ros.org/Robots}};
      \node[right] at (-3.0,-0.85)  {\tiny 01/05/2014 : 2048 Packages supportés sur \url{http://wiki.ros.org/Packages}};
+     \node[right] at (-3.0,-1.125)  {\tiny 25/04/2017 : 1400 Packages supportés sur \url{http://wiki.ros.org/Packages}};
   
      \node at (  0.0,-3.5) {\pgfuseimage{ros-nao}};
      \node at (  4.0,-3.5) {\pgfuseimage{ros-turtlebot}};

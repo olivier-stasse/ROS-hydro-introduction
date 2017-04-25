@@ -111,7 +111,7 @@
         at (current page.center)
             {
               AIP, Toulouse\\
-              Février 2016
+              Avril 2017
             }; 
     \end{tikzpicture}
   \end{frame}
@@ -124,23 +124,6 @@
 \section{Panorama}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Motivations générales}
-\begin{frame}
-\frametitle{Motivations}
-\begin{block}{Passage à l'échelle}
-La communauté robotique doit \textit{collaborer} pour créer des systèmes robotiques
-de qualité à l'exemple de l'informatique et la physique. \\
-ROS est l'outil qui a permis ce passage. 
-\end{block}
-
-\begin{tikzpicture}[remember picture, overlay]
-  \pgfputat{\pgfxy(0.0,-2.5)}{\pgfbox[left,base]{\pgfuseimage{ROSEquation}}};
-  \node[xshift=3cm,yshift=-2.5cm]{Plomberie};
-  \node[xshift=5cm,yshift=-2.5cm]{Outils};
-  \node[xshift=7.15cm,yshift=-2.5cm]{Capacités};
-  \node[xshift=9.21cm,yshift=-2.5cm]{Ecosystème};
-\end{tikzpicture}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Motivations - Application robotique \only<2>{- Outils}\only<3>{distribuée}
   }
@@ -157,6 +140,23 @@ ROS est l'outil qui a permis ce passage.
   }
 \end{frame}
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Motivations}
+\begin{block}{Passage à l'échelle}
+La communauté robotique doit \textit{collaborer} pour créer des systèmes robotiques
+de qualité à l'exemple de l'informatique et la physique. \\
+ROS est l'outil qui a permis ce passage. 
+\end{block}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \pgfputat{\pgfxy(0.0,-2.5)}{\pgfbox[left,base]{\pgfuseimage{ROSEquation}}};
+  \node[xshift=3cm,yshift=-2.5cm]{Plomberie};
+  \node[xshift=5cm,yshift=-2.5cm]{Outils};
+  \node[xshift=7.15cm,yshift=-2.5cm]{Capacités};
+  \node[xshift=9.21cm,yshift=-2.5cm]{Ecosystème};
+\end{tikzpicture}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Motivations - Plomberie}
@@ -241,8 +241,10 @@ ROS est l'outil qui a permis ce passage.
    2013 - Aout & Willow Garage est absorbé par Suitable Technologies \\
    2013 - Aout & Le support de PR-2 est repris par Clearpath Robotics\\
    2013 - Septembre& Hydro Medusa (prévu) \\ 
-   2014 - Juillet & Indigo Igloo \\ 
-   2015 - May & Jade Turtle \\ \hline
+   2014 - Juillet & Indigo Igloo (EOL - Avril 2019)\\ 
+   2015 - May & Jade Turtle (EOL - Mai 2017) \\
+   2016 - May & Kinetic Kame (EOL - Mai 2021) \\ 
+   2017 - May & Lunar Loggerhead \\ \hline
  \end{tabular}
  }
 \end{frame}
@@ -251,12 +253,12 @@ ROS est l'outil qui a permis ce passage.
 \frametitle{ROS: Normalisation des releases}
  \vskip -0.25cm
  \begin{itemize}
-   \item Hydro Medusa (Aug 2013)
+   \item Kinetic Kame (Mai 2016 - Mai 2021)
      \begin{itemize}
-       \item Ubuntu Precise (12.04 LTS)
-       \item Ubuntu Quantal (12.10)
-       \item Ubuntu Raring (13.04)
-       \item C++03, Boost 1.48, Lisp SBCL 1.0.x, Python 2.7, CMake 2.8.3
+       \item Ubuntu Wily (15.10)
+       \item Ubuntu Xenial (16.04 LTS)
+       \item C++11, Boost 1.55, Lisp SBCL 1.2.4, Python 2.7, CMake 3.0.2
+       \item Ogre3D 1.9.x, Gazebo 7, PCL 1.7.x, OpenCV 3.1.x, Qt 5.3.x, PyQt5
      \end{itemize}
    \item Indigo Igloo (May 2014)
      \begin{itemize}
@@ -270,9 +272,9 @@ ROS est l'outil qui a permis ce passage.
  \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Installation ROS Hydro}
+\subsection{Installation ROS Indigo}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Installation de ROS - Hydro - Ubuntu 12.04.4 LTS}
+\begin{frame}{Installation de ROS - Indigo - Ubuntu 14.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-2.5)
   {
@@ -292,14 +294,14 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {4 - Installation des paquets};\\
     \node[roscode] 
-      {sudo apt-get install ros-hydro-desktop-full};\\
+      {sudo apt-get install ros-indigo-desktop-full};\\
   };
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Configuration ROS Hydro}
+\subsection{Configuration ROS Indigo}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
+\begin{frame}{Configuration - Indigo - Ubuntu 14.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-2.5)
   {
@@ -310,7 +312,7 @@ ROS est l'outil qui a permis ce passage.
     \node[roslist] 
       {2 - Ligne à ajouter au fichier .bashrc}; \\
     \node[roscode] 
-      {source /opt/ros/hydro/setup.bash};\\
+      {source /opt/ros/indigo/setup.bash};\\
     \node[roslist] 
       {3 - Création de l'espace catkin};\\
     \node[roscode] 
@@ -323,7 +325,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
+\begin{frame}{Configuration - Indigo - Ubuntu 14.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-1.0)
   {
@@ -337,14 +339,14 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Configuration - Hydro - Ubuntu 12.04.4 LTS}
+\begin{frame}{Configuration - Indigo - Ubuntu 14.04.4 LTS}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-2.5)
   {
     \node[roslist] 
       { Votre distribution ROS est indiquée par ROS\_DISTRO }; \\
     \node[roscode] 
-      {ROS\_DISTRO=hydro }; \\
+      {ROS\_DISTRO=indigo }; \\
     \node[roslist]
       { L'annuaire de votre application est spécifié par ROS\_MASTER\_URI};\\
     \node[roscode] 
@@ -359,9 +361,9 @@ ROS est l'outil qui a permis ce passage.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Navigation dans ROS Hydro}
+\subsection{Navigation dans ROS Indigo}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{ROS Filesystem - Navigation - Hydro}
+\begin{frame}{ROS Filesystem - Navigation - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-3.0)
   {
@@ -385,9 +387,9 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Création d'un paquet pour ROS Hydro}    
+\subsection{Création d'un paquet pour ROS Indigo}    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Création d'un paquet ROS - Définition - Hydro}
+\begin{frame}{Création d'un paquet ROS - Définition - Indigo}
   \begin{itemize}
     \item Le paquet doit contenir un fichier \textcolor{blue}{package.xml} qui suit le
       format catkin. Le fichier \textcolor{blue}{package.xml} contient des meta
@@ -409,7 +411,7 @@ ROS est l'outil qui a permis ce passage.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Création de paquets}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Paquets dans un workspace catkin - (1/9) - Hydro}
+\begin{frame}{Paquets dans un workspace catkin - (1/9) - Indigo}
 \tikzstyle{every node}=[anchor=west
 %,font=\fontsize{6}{6}\selectfont
 ]
@@ -443,14 +445,14 @@ ROS est l'outil qui a permis ce passage.
 }
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Paquets dans un workspace catkin - (2/9) - Hydro}
+\begin{frame}{Paquets dans un workspace catkin - (2/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   \matrix[anchor=west] at (0,-2.5)
   {
     \node[roslist] 
       {1 - Aller dans le répertoire src du paquet}; \\
     \node[roscode] 
-      {cd \~ /catkin\_ws/src}; \\
+      {cd \textasciitilde/catkin\_ws/src}; \\
     \node[roslist]
     {Pour créer un nouveau package, et ses dépendences:\\
       {\bf catkin\_create\_pkg}}; \\
@@ -461,7 +463,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Paquets dans un workspace catkin - (3/9) - Hydro}
+\begin{frame}{Paquets dans un workspace catkin - (3/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -490,7 +492,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Paquets dans un workspace catkin - (4/9) - Hydro}
+\begin{frame}{Paquets dans un workspace catkin - (4/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -515,7 +517,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Personnalisation du paquet - (5/9) - Hydro}
+\begin{frame}{Personnalisation du paquet - (5/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -536,7 +538,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Personnalisation du paquet - (6/9) - Hydro}
+\begin{frame}{Personnalisation du paquet - (6/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -555,7 +557,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Personnalisation du paquet - (7/9) - Hydro}
+\begin{frame}{Personnalisation du paquet - (7/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -582,7 +584,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Personnalisation du paquet - (8/9) - Hydro}
+\begin{frame}{Personnalisation du paquet - (8/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -603,7 +605,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Personnalisation du paquet - (9/9) - Hydro}
+\begin{frame}{Personnalisation du paquet - (9/9) - Indigo}
 \begin{tikzpicture}[remember picture, overlay]        
   %\draw[help lines] (0,-3) grid (5,0);         
   %\node at (0,0) {(0,0)};
@@ -634,7 +636,7 @@ ROS est l'outil qui a permis ce passage.
 \end{tikzpicture}  
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Compilation des paquets Hydro}
+\begin{frame}{Compilation des paquets Indigo}
   \begin{tikzpicture}[remember picture, overlay]
     \matrix[anchor=west] at (0,-2.5)
     {
